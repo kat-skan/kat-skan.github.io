@@ -1,56 +1,63 @@
-<section class="teacher-tools">
-    <h2>Teacher Tools</h2>
-    <div class="grid-container">
-        <div class="card" id="kat-skanner">
-            <h3>KAT Skanner</h3>
-            <p>Utilize our KAT Skanner tool to scan student projects and provide feedback.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #0077cc;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .tool {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+        .tool h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Teacher Tools</h1>
+    </header>
+    <div class="container">
+        <div class="tool">
+            <h2>Tool 1</h2>
+            <p>Description of tool 1.</p>
         </div>
-        <div class="card" id="attendance-filter">
-            <h3>Attendance Filter</h3>
-            <p>Filter attendance records to easily track student participation.</p>
+        <div class="tool">
+            <h2>Tool 2</h2>
+            <p>Description of tool 2.</p>
         </div>
+        <div class="tool">
+            <h2>Tool 3</h2>
+            <p>Description of tool 3.</p>
+        </div>
+        <!-- Add more tools as needed -->
     </div>
-    <div class="gate-pass">
-        <input type="password" placeholder="Enter Gate Passcode" id="passcode"/>
-        <button onclick="validatePasscode()">Submit</button>
-    </div>
-</section>
-
-<style>
-    .teacher-tools {
-        background-color: lavender;
-        padding: 20px;
-        margin: 20px;
-        border-radius: 10px;
-        color: black;
-    }
-    
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-
-    .card {
-        background-color: purple;
-        padding: 15px;
-        border-radius: 8px;
-        color: white;
-        text-align: center;
-    }
-
-    #gang-pass {
-        background-color: pink;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: center;
-    }
-</style>
-
-<script>
-    function validatePasscode() {
-        const passcode = document.getElementById('passcode').value;
-        // Implement passcode validation logic
-        alert("Passcode submitted: " + passcode);
-    }
-</script>
+</body>
+</html>
