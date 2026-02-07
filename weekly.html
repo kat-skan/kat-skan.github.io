@@ -2,51 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Weekly Minutes Tool</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
-    <h1>Weekly Minutes Tool</h1>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Agenda Item</th>
-            <th>Notes</th>
-        </tr>
-        <tr>
-            <td>2026-02-07</td>
-            <td>Example Agenda Item</td>
-            <td>Example notes for the agenda item.</td>
-        </tr>
-        <!-- More rows as needed -->
-    </table>
-    <script>
-        // Example JavaScript code for additional functionality
-        console.log('Weekly Minutes Tool loaded');
-    </script>
+    <header>
+        <h1>Weekly Minutes Tool</h1>
+    </header>
+    <main>
+        <form id="minutesForm">
+            <label for="weekEnding">Week Ending:</label>
+            <input type="date" id="weekEnding" required>
+
+            <label for="agendaItems">Agenda Items:</label>
+            <textarea id="agendaItems" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="minutesDisplay">
+            <h2>Minutes</h2>
+            <ul id="minutesList"></ul>
+        </div>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
+
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+header {
+    background: #007BFF;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+main {
+    margin: 20px;
+}
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background: #0056b3;
+}
+
+/* script.js */
+document.getElementById('minutesForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const weekEnding = document.getElementById('weekEnding').value;
+    const agendaItems = document.getElementById('agendaItems').value;
+    const minutesList = document.getElementById('minutesList');
+    const li = document.createElement('li');
+    li.textContent = `Week Ending: ${weekEnding} - Agenda: ${agendaItems}`;
+    minutesList.appendChild(li);
+    this.reset();
+});
