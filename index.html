@@ -7,57 +7,45 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
-        }
-        header {
-            background: #0077cc;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
+            margin: 0;
             padding: 20px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         h1 {
+            text-align: center;
             color: #333;
         }
-        .tool {
-            margin: 15px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
+        .card {
+            background: white;
             border-radius: 5px;
-            background: #fafafa;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 20px;
+            text-align: center;
         }
-        .tool h2 {
-            margin: 0;
-            font-size: 1.2em;
+        .card a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Teacher Tools</h1>
-    </header>
+    <h1>Teacher Tools</h1>
     <div class="container">
-        <div class="tool">
-            <h2>Tool 1</h2>
-            <p>Description of tool 1.</p>
+        <div class="card">
+            <h2>Scan Tools</h2>
+            <a href="scan.html">Go to Scan Page</a>
         </div>
-        <div class="tool">
-            <h2>Tool 2</h2>
-            <p>Description of tool 2.</p>
+        <div class="card">
+            <h2>Weekly Tools</h2>
+            <a href="weekly.html">Go to Weekly Page</a>
         </div>
-        <div class="tool">
-            <h2>Tool 3</h2>
-            <p>Description of tool 3.</p>
-        </div>
-        <!-- Add more tools as needed -->
     </div>
 </body>
 </html>
