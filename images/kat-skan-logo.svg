@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80">
+  <!-- Background rectangle with light blue -->
+  <rect width="200" height="80" fill="#add8e6" rx="8"/>
+  
+  <!-- Dark blue text for KAT Skan -->
+  <text x="100" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="darkblue" text-anchor="middle">KAT Skan</text>
+  
+  <!-- Teacher Tools subtitle -->
+  <text x="100" y="55" font-family="Arial, sans-serif" font-size="12" fill="darkblue" text-anchor="middle">Teacher Tools</text>
+  
+  <!-- Simple icon elements -->
+  <text x="20" y="40" font-size="20">🏫</text>
+  <text x="170" y="40" font-size="20">📝</text>
+</svg>
