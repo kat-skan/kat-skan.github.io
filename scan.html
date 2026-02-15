@@ -281,7 +281,7 @@ body.mode-adjusted .scanInput{ border-color: rgba(239,68,68,.75); }
       padding:2px 10px;
       border:1px solid var(--line);
       border-radius: 999px;
-      font-size:12px;
+      font-size:20px;
       color:var(--muted);
       background:#fff;
     }
@@ -823,7 +823,7 @@ const DEFAULT_TEACHERS = [
   "Kohn",
   "Anyadiegue",
   "Armstrong",
-  "Barnes",
+  "Hall Sweeps",
   "Dykstra",
   "Farmer",
   "Franklin",
@@ -833,7 +833,8 @@ const DEFAULT_TEACHERS = [
   "Gilmer",
   "Williams",
   "Goin",
-  "AfterSchoolMatters"
+  "AfterSchoolMatters",
+  "Smith"
 ];
 
 
@@ -1844,6 +1845,28 @@ $("saveEntryIdsBtn").addEventListener("click", ()=>{
   heartbeat();
   tickPeriodPill();
   logLine("Ready.");
+})();
+/* === Custom Reset Plug-in === */
+(function() {
+  const resetBtn = document.getElementById("modeResetBtn");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", function() {
+      // 1. Find the override input
+      const overrideInput = document.getElementById("overridePeriod");
+      
+      if (overrideInput) {
+        // 2. Clear the text
+        overrideInput.value = "";
+        
+        // 3. Save the fact that it's now empty to memory
+        if (typeof persistBasics === "function") {
+          persistBasics();
+        }
+        
+        console.log("Plug-in: Override Period has been cleared.");
+      }
+    });
+  }
 })();
 </script>
 </body>
