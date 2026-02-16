@@ -131,6 +131,32 @@
       overflow:auto;
     }
 
+    .chipList{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:8px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .chip button{
+      border:none;
+      background:transparent;
+      cursor:pointer;
+      color:var(--muted);
+      font-size:12px;
+      padding:0 2px;
+    }
+
     /* Missing-email highlight */
     tr.missing{
       background: var(--warnRow);
@@ -264,6 +290,30 @@
         </div>
       </div>
 
+      <div class="row" style="margin-top:12px;">
+        <div class="col" style="min-width:260px;">
+          <label>Additional recipients (optional)</label>
+          <select id="extraEmailSelect">
+            <option value="" selected disabled>Select a recipient…</option>
+            <option value="ajgriffin1@cps.edu">9th Grade Counselor (ajgriffin1@cps.edu)</option>
+            <option value="kbrown6@cps.edu">10 Grade Counselor (kbrown6@cps.edu)</option>
+            <option value="ddroberts@cps.edu">11 Grade Counselor (ddroberts@cps.edu)</option>
+            <option value="mnorris6@cps.edu">12 Grade Counselor (mnorris6@cps.edu)</option>
+            <option value="pacaldwell@cps.edu">Attendance Office (pacaldwell@cps.edu)</option>
+            <option value="nlharris-hammond@cps.edu">Interventionist (nlharris-hammond@cps.edu)</option>
+            <option value="champ@cps.edu">Dean Office (champ@cps.edu)</option>
+            <option value="pjwatson2@cps.edu">AP Watson (pjwatson2@cps.edu)</option>
+            <option value="acwilliams2@cps.edu">AP Williams (acwilliams2@cps.edu)</option>
+            <option value="lmtaylor8@cps.edu">Principal Taylor (lmtaylor8@cps.edu)</option>
+          </select>
+          <div class="chipList" id="extraEmailList"></div>
+        </div>
+        <div class="col" style="min-width:180px;">
+          <button class="btn" id="addExtraBtn">Add recipient</button>
+          <div class="tiny" style="margin-top:8px;">Parents + students are always included.</div>
+        </div>
+      </div>
+
       <div class="tiny" style="margin-top:10px;">
         "Send Weekly Emails" will email each student's chart to the addresses in <span class="mono">Contact Info</span> (Parent + Student).
       </div>
@@ -391,7 +441,8 @@
       end: $("end").value,
       maxPoints: $("maxPoints").value,
       student: $("student").value.trim(),
-      pass: getPass()
+      pass: getPass(),
+      extraRecipients: __extraRecipients.join(",")
     };
   }
 
@@ -500,6 +551,55 @@
 
   let __lastRows = null;
   let __lastMax = null;
+  let __extraRecipients = [];
+
+  function isValidEmail(value){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
+  }
+
+  function renderExtraRecipients(){
+    const el = $("extraEmailList");
+    if (!__extraRecipients.length){
+      el.innerHTML = "";
+      return;
+    }
+
+    el.innerHTML = __extraRecipients.map(email => {
+      const safe = esc(email);
+      return `
+        <span class="chip">
+          ${safe}
+          <button type="button" aria-label="Remove ${safe}" data-email="${safe}">x</button>
+        </span>
+      `;
+    }).join("");
+
+    el.querySelectorAll("button[data-email]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const email = btn.getAttribute("data-email");
+        __extraRecipients = __extraRecipients.filter(e => e !== email);
+        renderExtraRecipients();
+      });
+    });
+  }
+
+  function addExtraRecipient(){
+    const select = $("extraEmailSelect");
+    const value = select.value.trim();
+
+    if (!value) return;
+    if (!isValidEmail(value)){
+      alert("Please select a valid email address.");
+      return;
+    }
+
+    if (!__extraRecipients.includes(value)){
+      __extraRecipients.push(value);
+    }
+
+    select.value = "";
+    renderExtraRecipients();
+  }
 
   async function compute(){
     try{
@@ -566,6 +666,8 @@
 
   $("computeBtn").addEventListener("click", compute);
   $("sendBtn").addEventListener("click", sendEmails);
+
+  $("addExtraBtn").addEventListener("click", addExtraRecipient);
 
   (function init(){
     if (localStorage.getItem(LS.unlocked) === "1" && localStorage.getItem(LS.pass)){
