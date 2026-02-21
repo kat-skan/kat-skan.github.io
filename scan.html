@@ -329,6 +329,23 @@ body.mode-adjusted .scanInput{ border-color: rgba(239,68,68,.75); }
 }
 .toolbar h1{ margin:0; font-size:18px; letter-spacing:.2px; color: #fff; }
 .toolbar .sub{ color: rgba(255, 255, 255, 0.9); }
+.toolbarActions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  flex:1;
+}
+.toolbar .header-btn{
+  text-decoration:none;
+  font-weight:600;
+  background:#fff;
+  color:#1f4e85;
+  border-color:#fff;
+  margin-left:auto;
+}
+.toolbar .header-btn:hover{ background:#eaf4ff; }
     .app-footer {
   margin-top: 2rem;
   font-size: 0.75rem;
@@ -418,9 +435,10 @@ body.mode-adjusted .scanInput{ border-color: rgba(239,68,68,.75); }
       <div class="sub">Click the scan box, scan QR codes. No tabs. Roster updates live.</div>
     </div>
 
-    <div class="row" style="justify-content:flex-end;">
+    <div class="toolbarActions">
       <span class="pill" id="pillStatus"><span class="dot warn" id="statusDot"></span><span id="statusText">Ready</span></span>
       <span class="pill"><span class="dot ok"></span><span class="mono" id="detectedPeriodPill">Period: —</span></span>
+      <a class="btn header-btn" href="index.html">Home</a>
     </div>
   </div>
 </header>
