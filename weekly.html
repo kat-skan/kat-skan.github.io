@@ -42,6 +42,28 @@
     }
     h1{ margin:0; font-size:18px; color:#fff; }
     .sub{ font-size:12px; color:var(--muted); margin-top:4px; }
+    .header-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .header-left{ min-width:0; }
+    .header-sub{ font-size:12px; color:#eaf4ff; margin-top:4px; }
+    .header-btn{
+      text-decoration:none;
+      font-weight:600;
+      background:#fff;
+      color:#1f4e85;
+      border-color:#fff;
+    }
+    .header-btn:hover{ background:#eaf4ff; }
+    @media (max-width: 720px){
+      .header-row{ flex-direction:column; align-items:flex-start; }
+      .header-btn{ align-self:flex-start; }
+    }
     .wrap{ max-width: 1100px; margin: 0 auto; padding: 16px 18px 40px; }
     .card{
       background:var(--card);
@@ -224,8 +246,13 @@
 </head>
 <body>
 <header>
-  <h1>Weekly Minutes Tool</h1>
-  <div class="sub">Compute totals from <span class="mono">Tracker</span>, preview charts here, then send emails automatically.</div>
+  <div class="header-row">
+    <div class="header-left">
+      <h1>Weekly Minutes Tool</h1>
+      <div class="header-sub">Compute totals from <span class="mono">Tracker</span>, preview charts here, then send emails automatically.</div>
+    </div>
+    <a class="btn header-btn" href="index.html">Home</a>
+  </div>
 </header>
 
 <div class="wrap">
