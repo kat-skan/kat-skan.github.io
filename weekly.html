@@ -335,8 +335,34 @@
           </select>
           <div class="chipList" id="extraEmailList"></div>
         </div>
+        <div class="col" style="min-width:260px;">
+          <label>Teacher Email (optional)</label>
+          <select id="teacherEmailSelect">
+            <option value="" selected disabled>Select a teacher…</option>
+            <option value="aganders@cps.edu">Andrea Anders (aganders@cps.edu)</option>
+            <option value="eganyadiegwu@cps.edu">Emeka Anyadiegwu (eganyadiegwu@cps.edu)</option>
+            <option value="djarmstrong4@cps.edu">David Armstrong (djarmstrong4@cps.edu)</option>
+            <option value="jwdykstra@cps.edu">Jacob Dykstra (jwdykstra@cps.edu)</option>
+            <option value="rkfarmer@cps.edu">Rasha Farmer (rkfarmer@cps.edu)</option>
+            <option value="kdfranklin7@cps.edu">Kena Franklin (kdfranklin7@cps.edu)</option>
+            <option value="rmgilmer@cps.edu">Roshaunda Gilmer (rmgilmer@cps.edu)</option>
+            <option value="wgrant3@cps.edu">Willie Grant (wgrant3@cps.edu)</option>
+            <option value="ejgrisby@cps.edu">Ebony Grisby-Terry (ejgrisby@cps.edu)</option>
+            <option value="lthayden@cps.edu">Lindsay Hayden (lthayden@cps.edu)</option>
+            <option value="kpkohn@cps.edu">Kerri Kohn (kpkohn@cps.edu)</option>
+            <option value="nanorris@cps.edu">Nicolette Norris (nanorris@cps.edu)</option>
+            <option value="breynoso@cps.edu">Berenice Padilla (breynoso@cps.edu)</option>
+            <option value="aereid1@cps.edu">Annie Reid (aereid1@cps.edu)</option>
+            <option value="asmith487@cps.edu">Angela-Dorsey Smith (asmith487@cps.edu)</option>
+            <option value="kagardner@cps.edu">Kerry Anne Thomas (kagardner@cps.edu)</option>
+            <option value="natripp@cps.edu">Nicikia Tripp (natripp@cps.edu)</option>
+            <option value="hwilliams37@cps.edu">Heather Williams (hwilliams37@cps.edu)</option>
+          </select>
+          <div class="chipList" id="teacherEmailList"></div>
+        </div>
         <div class="col" style="min-width:180px;">
           <button class="btn" id="addExtraBtn">Add recipient</button>
+          <button class="btn" id="addTeacherBtn">Add teacher</button>
           <div class="tiny" style="margin-top:8px;">Parents + students are always included.</div>
         </div>
       </div>
@@ -579,6 +605,7 @@
   let __lastRows = null;
   let __lastMax = null;
   let __extraRecipients = [];
+  let __teacherRecipients = [];
 
   function isValidEmail(value){
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || "").trim());
@@ -610,6 +637,32 @@
     });
   }
 
+  function renderTeacherRecipients(){
+    const el = $("teacherEmailList");
+    if (!__teacherRecipients.length){
+      el.innerHTML = "";
+      return;
+    }
+
+    el.innerHTML = __teacherRecipients.map(email => {
+      const safe = esc(email);
+      return `
+        <span class="chip">
+          ${safe}
+          <button type="button" aria-label="Remove ${safe}" data-email="${safe}">x</button>
+        </span>
+      `;
+    }).join("");
+
+    el.querySelectorAll("button[data-email]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const email = btn.getAttribute("data-email");
+        __teacherRecipients = __teacherRecipients.filter(e => e !== email);
+        renderTeacherRecipients();
+      });
+    });
+  }
+
   function addExtraRecipient(){
     const select = $("extraEmailSelect");
     const value = select.value.trim();
@@ -626,6 +679,24 @@
 
     select.value = "";
     renderExtraRecipients();
+  }
+
+  function addTeacherRecipient(){
+    const select = $("teacherEmailSelect");
+    const value = select.value.trim();
+
+    if (!value) return;
+    if (!isValidEmail(value)){
+      alert("Please select a valid email address.");
+      return;
+    }
+
+    if (!__teacherRecipients.includes(value)){
+      __teacherRecipients.push(value);
+    }
+
+    select.value = "";
+    renderTeacherRecipients();
   }
 
   async function compute(){
@@ -695,6 +766,7 @@
   $("sendBtn").addEventListener("click", sendEmails);
 
   $("addExtraBtn").addEventListener("click", addExtraRecipient);
+  $("addTeacherBtn").addEventListener("click", addTeacherRecipient);
 
   (function init(){
     if (localStorage.getItem(LS.unlocked) === "1" && localStorage.getItem(LS.pass)){
